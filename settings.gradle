@@ -1,2 +1,2 @@
-rootProject.name = 'cse373'
+rootProject.name = '373'
 include  '143review', 'deques', 'maps', 'heap', 'mazes'
