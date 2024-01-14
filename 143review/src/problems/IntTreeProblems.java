@@ -23,29 +23,106 @@ import datastructures.IntTree.IntTreeNode;
 
 public class IntTreeProblems {
 
+    private static int depthSum(IntTreeNode node, int level) {
+        if (null == node) {
+            return 0;
+        }
+
+        return node.data * level + depthSum(node.left, level + 1) + depthSum(node.right, level + 1);
+    }
     /**
      * Computes and returns the sum of the values multiplied by their depths in the given tree.
      * (The root node is treated as having depth 1.)
      */
     public static int depthSum(IntTree tree) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        return depthSum(tree.overallRoot, 1);
     }
 
+    private static void removeLeaves(IntTreeNode parent) {
+        if (null != parent.left) {
+            if (null == parent.left.left && null == parent.left.right) {
+                parent.left = null;
+            } else {
+                removeLeaves(parent.left);
+            }
+        }
+
+        if (null != parent.right) {
+            if (null == parent.right.left && null == parent.right.right) {
+                parent.right = null;
+            } else {
+                removeLeaves(parent.right);
+            }
+        }
+    }
     /**
      * Removes all leaf nodes from the given tree.
      */
     public static void removeLeaves(IntTree tree) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        if (null == tree.overallRoot) {
+            return;
+        }
+
+        if (null == tree.overallRoot.left && null == tree.overallRoot.right) {
+            tree.overallRoot = null;
+        } else {
+            removeLeaves(tree.overallRoot);
+        }
     }
 
+    private static IntTreeNode trim(IntTreeNode parent, int min, int max) {
+        if (null != parent.left) {
+            parent.left = trim(parent.left, min, max);
+        }
+
+        if (null != parent.right) {
+            parent.right = trim(parent.right, min, max);
+        }
+
+        if (min > parent.data || max < parent.data) {
+            if (null == parent.left) {
+                return parent.right;
+            }
+
+            if (null == parent.right) {
+                return parent.left;
+            }
+
+            if (null == parent.left.right) {
+                parent.left.right = parent.right;
+                return parent.left;
+            }
+
+            if (null == parent.right.left) {
+                parent.right.left = parent.left;
+                return parent.right;
+            }
+
+            parent.right.right.left = parent.right.left;
+            parent.right.left = parent.left;
+            return parent.right;
+        }
+
+        return parent;
+    }
     /**
      * Removes from the given BST all values less than `min` or greater than `max`.
      * (The resulting tree is still a BST.)
      */
     public static void trim(IntTree tree, int min, int max) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        if (null == tree.overallRoot) {
+            return;
+        }
+
+        tree.overallRoot = trim(tree.overallRoot, min, max);
     }
 }

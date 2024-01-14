@@ -15,7 +15,18 @@ public class ArrayProblems {
      */
     public static String toString(int[] array) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        String str = "[";
+        for (int i = 0; i < array.length; i++) {
+            str = str + array[i];
+            if (array.length - 1 > i) {
+                str += ", ";
+            }
+        }
+        str += "]";
+
+        return str;
     }
 
     /**
@@ -24,7 +35,14 @@ public class ArrayProblems {
      */
     public static int[] reverse(int[] array) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        int[] reversed = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            reversed[i] = array[array.length - i - 1];
+        }
+
+        return reversed;
     }
 
     /**
@@ -32,6 +50,16 @@ public class ArrayProblems {
      */
     public static void rotateRight(int[] array) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        if (0 == array.length) {
+            return;
+        }
+
+        int temp = array[array.length - 1];
+        for (int i = array.length - 1; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+        array[0] = temp;
     }
 }

@@ -1,5 +1,6 @@
 package problems;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,21 @@ public class MapProblems {
      */
     public static boolean contains3(List<String> list) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String str: list) {
+            if (map.containsKey(str)) {
+                if (2 == map.get(str)) {
+                    return true;
+                }
+                map.put(str, map.get(str) + 1);
+            } else {
+                map.put(str, 1);
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -22,6 +37,14 @@ public class MapProblems {
      */
     public static Map<String, Integer> intersect(Map<String, Integer> m1, Map<String, Integer> m2) {
         // TODO replace this with your code
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // throw new UnsupportedOperationException("Not implemented yet.");
+
+        Map<String, Integer> result = new HashMap<String, Integer>();
+        for (Map.Entry<String, Integer> entry: m1.entrySet()) {
+            if (m2.containsKey(entry.getKey()) && m2.get(entry.getKey()) == entry.getValue()) {
+                result.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return result;
     }
 }
